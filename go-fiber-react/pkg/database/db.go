@@ -1,0 +1,27 @@
+package database
+
+import (
+	"log"
+
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
+)
+
+var DBConnection *gorm.DB
+
+func ConnectDB() {
+	dsn := "host=localhost user=postgres dbname=go_fiber_quasar port=5432 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
+		Logger: logger.Default.LogMode(logger.Error),
+	})
+
+	if err != nil {
+		panic("Failed to connect the database")
+	}
+
+	log.Println("Connected")
+
+	DBConnection = db
+
+}
