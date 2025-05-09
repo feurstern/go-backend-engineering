@@ -1,6 +1,7 @@
 package database
 
 import (
+	"go-fiber-react/pkg/model"
 	"log"
 
 	"gorm.io/driver/postgres"
@@ -22,6 +23,7 @@ func ConnectDB() {
 
 	log.Println("Connected")
 
+	db.AutoMigrate(new(model.TodoList))
 	DBConnection = db
 
 }

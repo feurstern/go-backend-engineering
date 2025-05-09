@@ -23,6 +23,7 @@ func main() {
 
 	defer postgresDb.Close()
 
+	// app.Use(logger.New({}))
 	routers.SetupRoutes(app)
 
 	app.Listen(":5353")
