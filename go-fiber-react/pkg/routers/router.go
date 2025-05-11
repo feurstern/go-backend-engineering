@@ -14,6 +14,10 @@ func SetupRoutes(app *fiber.App) {
 		return c.SendString("Connected!")
 	})
 
+	app.Post("/user-delete/:id", controller.DeleteUser)
+
+	app.Post("/role-delete/:id", controller.DeleteTodoList)
+
 	app.Get("/user-role", controller.UserRoleList)
 
 	app.Get("/welcome-message", func(c *fiber.Ctx) error {
