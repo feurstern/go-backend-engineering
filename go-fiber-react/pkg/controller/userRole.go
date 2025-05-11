@@ -8,20 +8,20 @@ import (
 )
 
 func UserRoleList(c *fiber.Ctx) error {
-	context := fiber.Map{
-		"message": "User role list",
-	}
 
 	db := database.DBConnection
+	var user_role []model.UserRoles
 
-	var user_role *model.UserRoles
+	if err := db.Where("deleted_at IS NULL").Find(&user_role).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"msg":     "Error during retrieving the data",
+		})
+	}
 
-	db.Find(&user_role)
-
-	c.Status(200)
-
-	context["user_roles"] = user_role
-
-	return c.JSON(context)
+	return c.Status(fiber.StatusAccepted).JSON(fiber.Map{
+		"success": true,
+		"data":    user_role,
+	})
 
 }
