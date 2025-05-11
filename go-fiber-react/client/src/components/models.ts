@@ -9,6 +9,6 @@ export interface Meta {
 
 export interface Skills {
   id: number;
-  programmingLanaguage: string;
+  language: string;
   level: string;
 }

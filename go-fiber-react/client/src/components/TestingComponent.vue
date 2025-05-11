@@ -1,20 +1,18 @@
-<script lang="ts">
-import { title } from 'process';
+<script setup lang="ts">
 import { Skills } from './models';
+import { ref, Ref, defineProps } from 'vue';
 
+const t1: Ref<string> = ref('');
 interface TestingProps {
   title: string;
   skill: Skills[];
 }
 
-const props = withDefaults(defineProps<TestingProps>(), {
-  skill: () => [],
-});
+const props = defineProps<TestingProps>();
 </script>
-
 <template>
-  <p>title {{ title }}</p>
+  <p>title: {{ props.title }}</p>
   <ul>
-    <li v-for="x in skill" :key="x.id">Language : {{ x }}</li>
+    <li v-for="x in props.skill" :key="x.id">Language: {{ x.language }}</li>
   </ul>
 </template>

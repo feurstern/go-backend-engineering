@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
-import type { Todo, Meta } from 'components/models';
+import { Component, defineAsyncComponent, ref } from 'vue';
+import type { Todo, Meta, Skills } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
 
 const todos = ref<Todo[]>([
@@ -26,9 +26,26 @@ const todos = ref<Todo[]>([
   },
 ]);
 
+const TestingComponent: Component = defineAsyncComponent(
+  () => import('components/TestingComponent.vue'),
+);
+
 const meta = ref<Meta>({
   totalCount: 1200,
 });
+
+const skills = ref<Skills[]>([
+  {
+    id: 1,
+    language: 'Go',
+    level: 'Advance',
+  },
+  {
+    id: 2,
+    language: 'Rust',
+    level: 'Advance',
+  },
+]);
 </script>
 
 <template>
@@ -39,5 +56,7 @@ const meta = ref<Meta>({
       :todos="todos"
       :meta="meta"
     ></example-component>
+    xixi
+    <testing-component title="test" :skill="skills" />
   </q-page>
 </template>
