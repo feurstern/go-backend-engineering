@@ -13,6 +13,8 @@ const props = defineProps<TestingProps>();
 <template>
   <p>title: {{ props.title }}</p>
   <ul>
-    <li v-for="x in props.skill" :key="x.id">Language: {{ x.language }}</li>
+    <li class="bg-red text-white" v-for="x in props.skill" :key="x.id">
+      Language: {{ x.language }}
+    </li>
   </ul>
 </template>

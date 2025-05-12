@@ -12,3 +12,9 @@ export interface Skills {
   language: string;
   level: string;
 }
+
+export interface CarouselInterface {
+  id: number;
+  text: string;
+  iconName: string;
+}
