@@ -2,7 +2,7 @@
 import { Skills } from './models';
 import { ref, Ref, defineProps } from 'vue';
 
-const t1: Ref<string> = ref('');
+// const t1: Ref<string> = ref('');
 interface TestingProps {
   title: string;
   skill: Skills[];
