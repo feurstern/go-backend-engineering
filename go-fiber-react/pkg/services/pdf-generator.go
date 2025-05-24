@@ -1,11 +1,14 @@
 package services
 
 import (
+	"log"
 	"time"
 
 	"github.com/johnfercher/maroto/v2"
 	"github.com/johnfercher/maroto/v2/pkg/components/image"
 	"github.com/johnfercher/maroto/v2/pkg/components/line"
+	"github.com/johnfercher/maroto/v2/pkg/components/list"
+	"github.com/johnfercher/maroto/v2/pkg/components/row"
 	"github.com/johnfercher/maroto/v2/pkg/components/text"
 	"github.com/johnfercher/maroto/v2/pkg/config"
 	"github.com/johnfercher/maroto/v2/pkg/consts/align"
@@ -33,6 +36,7 @@ func GenerateInvoice() {
 func generate(m core.Maroto) {
 	addHeader(m)
 	addInvoiceDetails(m)
+	addItemList(m)
 }
 
 func addHeader(m core.Maroto) {
@@ -70,5 +74,90 @@ func addInvoiceDetails(m core.Maroto) {
 		}))
 
 	m.AddRow(10, line.NewCol(12))
+
+}
+
+type InvoiceItem struct {
+	Item            string
+	Description     string
+	Quantity        string
+	Price           string
+	DiscountedPrice string
+	Total           string
+}
+
+func (i InvoiceItem) GetHeader() core.Row {
+
+	return row.New(10).Add(
+		text.NewCol(2, "Item", props.Text{
+			Style: fontstyle.Bold},
+		),
+		text.NewCol(3, "Description", props.Text{
+			Style: fontstyle.Bold,
+		}),
+		text.NewCol(1, "Quantity", props.Text{
+			Style: fontstyle.Bold,
+		}),
+		text.NewCol(2, "Price", props.Text{
+			Style: fontstyle.Bold,
+		}),
+		text.NewCol(2, "Discounted Price", props.Text{
+			Style: fontstyle.Bold,
+		}),
+		text.NewCol(2, "Total", props.Text{
+			Style: fontstyle.Bold,
+		}),
+	)
+}
+
+func (o InvoiceItem) GetContent(i int) core.Row {
+	r := row.New(5).Add(
+		text.NewCol(2, o.Item),
+		text.NewCol(3, o.Description),
+		text.NewCol(2, o.Quantity),
+		text.NewCol(2, o.Price),
+		text.NewCol(2, o.DiscountedPrice),
+		text.NewCol(2, o.Total),
+	)
+
+	if i%2 == 0 {
+		r.WithStyle(&props.Cell{
+			BackgroundColor: &props.Color{Red: 240, Green: 240, Blue: 240},
+		})
+	}
+
+	return r
+}
+
+func getObjects() []InvoiceItem {
+	var items []InvoiceItem
+
+	contents := [][]string{
+		{"Laptop", "14inc, 16GB", "2", "121212", "21121", "12121"},
+		{"Laptop", "14inc, 16GB", "2", "121212", "21121", "12121"},
+	}
+
+	for i := 0; i < len(contents); i++ {
+		items = append(items, InvoiceItem{
+			Item:            contents[i][0],
+			Description:     contents[i][1],
+			Quantity:        contents[i][2],
+			Price:           contents[i][3],
+			DiscountedPrice: contents[i][4],
+			Total:           contents[i][5],
+		})
+	}
+
+	return items
+}
+
+func addItemList(m core.Maroto) {
+	rows, err := list.Build[InvoiceItem](getObjects())
+
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	m.AddRows(rows...)
 
 }
