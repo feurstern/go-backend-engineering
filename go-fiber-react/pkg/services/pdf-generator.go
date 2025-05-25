@@ -161,3 +161,19 @@ func addItemList(m core.Maroto) {
 	m.AddRows(rows...)
 
 }
+
+func addFooter(m core.Maroto) {
+	m.AddRow(15,
+		text.NewCol(8, "Total Amount", props.Text{
+			Top:   5,
+			Style: fontstyle.Bold,
+			Size:  10,
+			Align: align.Right,
+		}),
+		text.NewCol(4, "IDR. 1212121", props.Text{
+			Top:   5,
+			Style: fontstyle.Bold,
+			Size:  10,
+			Align: align.Center,
+		}))
+}
