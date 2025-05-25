@@ -24,4 +24,6 @@ func SetupRoutes(app *fiber.App) {
 		return c.JSON(fiber.Map{"Message": "Welcome to the app"})
 	})
 
+	app.Post("/registration", controller.Registration)
+
 }

@@ -36,6 +36,7 @@ func DeleteTodoList(c *fiber.Ctx) error {
 			"msg":     "Invalid id!",
 		})
 	}
+
 	db := database.DBConnection
 	var todo []model.TodoList
 
