@@ -22,11 +22,9 @@ func main() {
 	if err != nil {
 		panic("error in database connection")
 	}
-
 	defer postgresDb.Close()
 
 	// app.Use(logger.New({}))
 	routers.SetupRoutes(app)
-
 	app.Listen(":5353")
 }
