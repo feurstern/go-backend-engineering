@@ -14,6 +14,8 @@ func SetupRoutes(app *fiber.App) {
 		return c.SendString("Connected!")
 	})
 
+	app.Post("/login", controller.Login)
+
 	app.Post("/user-delete/:id", controller.DeleteUser)
 
 	app.Post("/role-delete/:id", controller.DeleteTodoList)
