@@ -36,6 +36,7 @@ func DeleteTodoList(c *fiber.Ctx) error {
 			"msg":     "Invalid id!",
 		})
 	}
+
 	db := database.DBConnection
 	var todo []model.TodoList
 
@@ -49,6 +50,56 @@ func DeleteTodoList(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"msg":     "The todo list has been deleted succesfully!",
+	})
+
+}
+
+func CreateTodo(c *fiber.Ctx) error {
+	payload := model.TodoPayload{}
+	if err := c.BodyParser(&payload); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Invalid request!",
+		})
+	}
+	// var todo model.TodoParent
+	todo := model.TodoParent{
+		Title: payload.Title,
+	}
+
+	db := database.DBConnection
+
+	if err := db.Create(&todo).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"message": "Failed to insert the create todo parent",
+		})
+	}
+
+	var todoLists []model.TodoList
+
+	for _, listPayload := range payload.List {
+		todoLists = append(todoLists, model.TodoList{
+			TodoParentId: todo.ID,
+			List:         listPayload.List,
+		})
+	}
+
+	if len(todoLists) > 0 {
+
+		if err := db.Create(&todoLists).Error; err != nil {
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"success": false,
+				"message": "Failed to insert the to do list",
+			})
+		}
+	}
+
+	todo.List = todoLists
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
+		"data":    todo,
 	})
 
 }
