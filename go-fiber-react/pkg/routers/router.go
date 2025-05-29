@@ -21,6 +21,8 @@ func SetupRoutes(app *fiber.App) {
 	app.Post("/role-delete/:id", controller.DeleteTodoList)
 
 	app.Get("/user-role", controller.UserRoleList)
+	app.Post("/todo", controller.CreateTodo)
+	app.Get("/todo", controller.TodoList)
 
 	app.Get("/welcome-message", func(c *fiber.Ctx) error {
 		return c.JSON(fiber.Map{"Message": "Welcome to the app"})

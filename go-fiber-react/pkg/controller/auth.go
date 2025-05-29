@@ -26,13 +26,11 @@ func Registration(c *fiber.Ctx) error {
 	if err := c.BodyParser(&payload); err != nil {
 		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 			"success": false,
-
 			"message": "Invalid Request"})
 	}
 
 	hashedPassword := HashedPasswordConversion(payload.Password)
 	db := database.DBConnection
-
 	user := model.User{
 		Username: payload.Username,
 		Email:    payload.Email,
@@ -54,12 +52,10 @@ func Registration(c *fiber.Ctx) error {
 			"message": "Failed to register",
 		})
 	}
-
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"message": "The user  has been registered succesfully",
 	})
-
 }
 
 func UserRegistration(c *fiber.Ctx) error {
@@ -100,6 +96,50 @@ func UserRegistration(c *fiber.Ctx) error {
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"success": true,
 		"message": "The data has been submitted successfully!",
+		"data":    user,
+	})
+}
+
+func UserRegister(c *fiber.Ctx) error {
+
+	payload := model.RegisterPayload{}
+
+	if err := c.BodyParser(&payload); err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Invalid request",
+		})
+	}
+
+	db := database.DBConnection
+
+	hashedPassword := HashedPasswordConversion(payload.Password)
+
+	user := model.User{
+		Username: payload.Username,
+		Password: hashedPassword,
+		Email:    payload.Email,
+		RoleId:   1,
+	}
+
+	var existingUser model.User
+
+	if err := db.Take(&existingUser, "where email ? ", payload.Email).Error; err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "The email is already taken!",
+		})
+	}
+
+	if err := db.Create(&user).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"Message": "Failed to inser the data",
+		})
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
 		"data":    user,
 	})
 }
