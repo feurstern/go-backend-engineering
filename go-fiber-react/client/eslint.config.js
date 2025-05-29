@@ -37,12 +37,12 @@ export default defineConfigWithVueTs(
 
   {
     files: ['**/*.ts', '**/*.vue'],
-    rules: {
-      '@typescript-eslint/consistent-type-imports': [
-        'error',
-        { prefer: 'type-imports' }
-      ],
-    }
+    // rules: {
+    //   '@typescript-eslint/consistent-type-imports': [
+    //     'error',
+    //     { prefer: 'type-imports' }
+    //   ],
+    // }
   },
   // https://github.com/vuejs/eslint-config-typescript
   vueTsConfigs.recommendedTypeChecked,

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Skills } from './models';
+import type { Skills } from './models';
 import { ref, Ref, defineProps } from 'vue';
 
 const t1: Ref<string> = ref('');

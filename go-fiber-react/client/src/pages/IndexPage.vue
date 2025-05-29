@@ -56,7 +56,6 @@ const skills = ref<Skills[]>([
       :todos="todos"
       :meta="meta"
     ></example-component>
-    xixi
     <testing-component title="test" :skill="skills" />
   </q-page>
 </template>

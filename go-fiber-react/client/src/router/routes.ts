@@ -10,6 +10,11 @@ const routes: RouteRecordRaw[] = [
     ],
   },
 
+  {
+    path: '/erp',
+    component: () => import('layouts/ErpLayout.vue'),
+  },
+
   // Always leave this as last one,
   // but you can also remove it
   {

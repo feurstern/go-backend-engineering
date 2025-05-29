@@ -1,4 +1,4 @@
-import { CarouselInterface } from './models';
+import type { CarouselInterface } from './models';
 
 export const carouselData: CarouselInterface[] = [
   {

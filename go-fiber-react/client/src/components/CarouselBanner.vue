@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { ref, Ref } from 'vue';
 import { carouselData } from './constant';
-// set fucking default of carousel
+
 const slide: Ref<string> = ref('style');
-const lorem: Ref<string> = ref('xixixi');
+// const lorem: Ref<string> = ref('xixixi');
 </script>
 
 <template>

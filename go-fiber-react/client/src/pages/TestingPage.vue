@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { Component, defineAsyncComponent } from 'vue';
 
-const CarouselComponent: Component = defineAsyncComponent(() => import('components/Carousel.vue'));
+const CarouselComponent: Component = defineAsyncComponent(
+  () => import('components/CarouselBanner.vue'),
+);
 </script>
 
 <template>
