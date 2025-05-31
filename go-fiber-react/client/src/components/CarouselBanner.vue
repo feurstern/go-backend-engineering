@@ -1,20 +1,9 @@
 <script setup lang="ts">
-import { onMounted, ref, Ref } from 'vue';
+import { onMounted } from 'vue';
 import { carouselData } from './constant';
-import { getUserList } from 'src/service/user';
+import useCarouselBanner from './CarouselBanner';
 
-const slide: Ref<string> = ref('style');
-const fetchUserList = async () => {
-  try {
-    const res = await getUserList();
-
-    if (res.success) {
-      console.log('res,', res.data);
-    }
-  } catch (error) {
-    console.log(error);
-  }
-};
+const { slide, fetchUserList } = useCarouselBanner();
 onMounted(() => {
   fetchUserList();
 });
