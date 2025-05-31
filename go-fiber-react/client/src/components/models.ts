@@ -19,7 +19,7 @@ export interface CarouselInterface {
   iconName: string;
 }
 
-export interface UseResponse {
+export interface UserResponse {
   data: Users[];
   success: boolean;
   message: string;
