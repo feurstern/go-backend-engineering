@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import useLeftMenuDrawer from './LeftMenuDrawer';
-
 import { LeftMenuDrawerList } from 'src/constant';
-const { menu } = useLeftMenuDrawer();
+
+const { menu, handleMenuChange } = useLeftMenuDrawer();
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const { menu } = useLeftMenuDrawer();
         :key="i"
         v-ripple
         :active="menu === x.name"
-        @click="menu = x.name"
+        @click="handleMenuChange(x.name)"
         active-class="my-menu-link"
       >
         <q-item-section avatar>

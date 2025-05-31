@@ -2,6 +2,13 @@
 import { Component, defineAsyncComponent, ref } from 'vue';
 import type { Todo, Meta, Skills } from 'components/models';
 import ExampleComponent from 'components/ExampleComponent.vue';
+import { useCountStore } from 'src/store/store';
+import { storeToRefs } from 'pinia';
+
+const store = useCountStore();
+
+const { count } = storeToRefs(store);
+const { increment, decrement } = store;
 
 const todos = ref<Todo[]>([
   {
@@ -50,6 +57,9 @@ const skills = ref<Skills[]>([
 
 <template>
   <q-page class="row items-center justify-evenly">
+    current : {{ count }}
+    <q-btn @click="increment"> + </q-btn>
+    <q-btn @click="decrement">-</q-btn>
     <example-component
       title="Example component"
       active
