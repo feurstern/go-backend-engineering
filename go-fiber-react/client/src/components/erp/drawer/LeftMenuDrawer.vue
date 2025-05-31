@@ -2,9 +2,7 @@
 import useLeftMenuDrawer from './LeftMenuDrawer';
 import { LeftMenuDrawerList } from 'src/constant';
 
-const { menu, selectedMenu, handleMenuChange } = useLeftMenuDrawer();
-
-console.log('SELECted menu', selectedMenu.value);
+const { menu, handleMenuChange } = useLeftMenuDrawer();
 </script>
 
 <template>
