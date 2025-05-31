@@ -30,7 +30,7 @@ func Userlist(c *fiber.Ctx) error {
 	return c.Status(200).JSON(fiber.Map{
 		"msg":     "user list",
 		"success": true,
-		"data ":   users,
+		"data":    users,
 	})
 
 }

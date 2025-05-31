@@ -1,9 +1,23 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { onMounted, ref, Ref } from 'vue';
 import { carouselData } from './constant';
+import { getUserList } from 'src/service/user';
 
 const slide: Ref<string> = ref('style');
-// const lorem: Ref<string> = ref('xixixi');
+const fetchUserList = async () => {
+  try {
+    const res = await getUserList();
+
+    if (res.success) {
+      console.log('res,', res.data);
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+onMounted(() => {
+  fetchUserList();
+});
 </script>
 
 <template>
