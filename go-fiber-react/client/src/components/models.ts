@@ -18,3 +18,34 @@ export interface CarouselInterface {
   text: string;
   iconName: string;
 }
+
+export interface UserResponse {
+  data: Users[];
+  success: boolean;
+  message: string;
+}
+export interface Users {
+  Id: number;
+  Username: string;
+  Email: string;
+  RoleId: number;
+  Role: Roles;
+}
+
+export interface Roles {
+  Id: number;
+  Name: string;
+  CreatedAt: string;
+}
+
+export interface userRegistrationPayload {
+  username: string;
+  email: string;
+  password: string;
+}
+
+export interface UserRegistrationRespsonse {
+  success: boolean;
+  message: string;
+  data: Users;
+}

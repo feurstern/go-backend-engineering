@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { ref, Ref } from 'vue';
+import { onMounted } from 'vue';
 import { carouselData } from './constant';
+import useCarouselBanner from './CarouselBanner';
 
-const slide: Ref<string> = ref('style');
-// const lorem: Ref<string> = ref('xixixi');
+const { slide, fetchUserList } = useCarouselBanner();
+onMounted(() => {
+  fetchUserList();
+});
 </script>
 
 <template>
