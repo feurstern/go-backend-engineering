@@ -37,3 +37,15 @@ export interface Roles {
   Name: string;
   CreatedAt: string;
 }
+
+export interface userRegistrationPayload {
+  Username: string;
+  Email: string;
+  Password: string;
+}
+
+export interface UserRegistrationRespsonse {
+  success: boolean;
+  message: string;
+  data: Users;
+}
