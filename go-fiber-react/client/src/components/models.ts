@@ -39,9 +39,9 @@ export interface Roles {
 }
 
 export interface userRegistrationPayload {
-  Username: string;
-  Email: string;
-  Password: string;
+  username: string;
+  email: string;
+  password: string;
 }
 
 export interface UserRegistrationRespsonse {
