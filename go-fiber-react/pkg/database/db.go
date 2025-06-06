@@ -1,7 +1,6 @@
 package database
 
 import (
-	"go-fiber-react/pkg/model"
 	"log"
 
 	"github.com/joho/godotenv"
@@ -27,7 +26,7 @@ func ConnectDB() {
 
 	log.Println("Connected")
 
-	db.AutoMigrate(new(model.TodoList))
+	// db.AutoMigrate(new(model.BookCover))
 	DBConnection = db
 
 }

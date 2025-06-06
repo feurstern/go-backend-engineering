@@ -86,7 +86,6 @@ func CreateTodo(c *fiber.Ctx) error {
 	}
 
 	if len(todoLists) > 0 {
-
 		if err := db.Create(&todoLists).Error; err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 				"success": false,

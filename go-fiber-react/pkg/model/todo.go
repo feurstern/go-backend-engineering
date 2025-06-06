@@ -33,19 +33,3 @@ type TodoList struct {
 	UpdatedAt    time.Time      `gorm:"null;column_updated_at"`
 	DeletedAt    gorm.DeletedAt `gorm:"index;column:deleted_at"`
 }
-
-type Book struct {
-	ID          int64          `gorm:"id"`
-	Title       string         `gorm:"not null; column:title"`
-	Author      string         `gorm:"not null; column:author"`
-	Description string         `gorm:"not null; column:description"`
-	Created_At  time.Time      `gorm:"column:created_at"`
-	Deleted_at  gorm.DeletedAt `gorm:"index;column:deleted_at"`
-}
-
-type BookCover struct {
-	ID     int64  `gorm:"id"`
-	BookId int64  `gorm:"foreignKey:Book.id"`
-	Name   string `gorm:"not null; column:name"`
-	Path   string `gorm:"not null; column:path"`
-}
