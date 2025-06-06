@@ -130,11 +130,9 @@ func Create(c *fiber.Ctx) error {
 	}
 
 	files := form.File["images"]
-
 	var bookCover []model.BookCover
 
 	for _, x := range files {
-
 		filename := fmt.Sprintf("/asset/image/%s", x.Filename)
 		if err := c.SaveFile(x, filename); err != nil {
 			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
