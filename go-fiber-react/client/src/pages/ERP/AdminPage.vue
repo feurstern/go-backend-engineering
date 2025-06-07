@@ -1,1 +1,8 @@
-<template>This is where the admin page will be rendered</template>
+<script setup lang="ts">
+import { Component, defineAsyncComponent } from 'vue';
+
+const userTableList: Component = defineAsyncComponent(() => import('components/erp/UserList.vue'));
+</script>
+<template>
+  <user-table-list />
+</template>

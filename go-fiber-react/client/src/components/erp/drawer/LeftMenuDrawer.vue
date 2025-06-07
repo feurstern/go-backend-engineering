@@ -26,9 +26,3 @@ const { menu, handleMenuChange } = useLeftMenuDrawer();
     </q-list>
   </div>
 </template>
-
-<style lang="sass">
-.my-menu-link
-  color: white
-  background: #F2C037
-</style>
