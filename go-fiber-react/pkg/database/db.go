@@ -22,7 +22,7 @@ func ConnectDB() {
 	})
 
 	if err != nil {
-		panic("Failed to connect the database")
+		panic("Kernal Panic :  Failed to connect to the database!")
 	}
 
 	log.Println("Connected")

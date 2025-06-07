@@ -24,13 +24,13 @@ func main() {
 	postgresDb, err := database.DBConnection.DB()
 
 	if err != nil {
-		panic("error in database connection")
+		panic("Kernel Panic : Failed to connect to the data")
 	}
 
 	addr := os.Getenv("HTTP_LISTEN_ADDRESS")
 
 	if addr == "" {
-		panic(" FATAL : FAILED TO LISTEN THE ADDRESS!")
+		panic(" Kernel Panic : FAILED TO LISTEN THE ADDRESS!")
 	}
 
 	defer postgresDb.Close()
