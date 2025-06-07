@@ -5,11 +5,11 @@ import useCarouselBanner from './CarouselBanner';
 
 const { slide, fetchUserList } = useCarouselBanner();
 onMounted(() => {
-  fetchUserList();
+  fetchUserList()
+    .catch((err) => console.log('error', err))
+    .then();
 });
 </script>
-
-
 
 <template>
   <div class="q-pa-md">

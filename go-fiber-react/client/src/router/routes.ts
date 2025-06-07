@@ -13,8 +13,22 @@ const routes: RouteRecordRaw[] = [
 
   {
     path: '/erp',
-    component: () => import('layouts/ErpLayout.vue'),
-    children: [{ path: '/registration', component: () => import('pages/RegistrationPage.vue') }],
+    component: () => import('layouts/NewErpLayout.vue'),
+    children: [
+      { path: 'registration', component: () => import('pages/RegistrationPage.vue') },
+      {
+        path: 'finance',
+        component: () => import('pages/ERP/FinancePage.vue'),
+      },
+      {
+        path: 'admin',
+        component: () => import('pages/ERP/AdminPage.vue'),
+      },
+      {
+        path: 'marketing',
+        component: () => import('pages/ERP/MarketingPage.vue'),
+      },
+    ],
   },
 
   // Always leave this as last one,
