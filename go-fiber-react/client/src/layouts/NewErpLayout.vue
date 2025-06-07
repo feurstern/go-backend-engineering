@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { Component, defineAsyncComponent } from 'vue';
 import useNewErpLayout from './newErpLayout';
 
 const { leftDrawerOpen, rightDrawerOpen, toggleLeftDrawer, toggleRightDrawer } = useNewErpLayout();
+
+const leftMenuList: Component = defineAsyncComponent(() => import('components/erp/LeftMenu.vue'));
 </script>
 
 <template>
@@ -25,6 +28,7 @@ const { leftDrawerOpen, rightDrawerOpen, toggleLeftDrawer, toggleRightDrawer } =
 
     <q-drawer show-if-above v-model="leftDrawerOpen" side="left" bordered>
       <!-- drawer content -->
+      <left-menu-list />
     </q-drawer>
 
     <q-drawer show-if-above v-model="rightDrawerOpen" side="right" bordered>

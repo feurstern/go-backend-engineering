@@ -4,7 +4,7 @@ import { userRegistration } from 'src/service/user';
 import { ref, Ref } from 'vue';
 
 export default () => {
-  const $q = useQuasar(); 
+  const $q = useQuasar();
   const username: Ref<string> = ref('');
   const email: Ref<string> = ref('');
   const password: Ref<string> = ref('');
