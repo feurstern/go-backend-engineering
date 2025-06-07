@@ -4,13 +4,13 @@ import { userRegistration } from 'src/service/user';
 import { ref, Ref } from 'vue';
 
 export default () => {
+  const $q = useQuasar(); 
   const username: Ref<string> = ref('');
   const email: Ref<string> = ref('');
   const password: Ref<string> = ref('');
   const isPwd: Ref<boolean> = ref(false);
 
   const handleSubmit = async () => {
-    const $q = useQuasar();
     try {
       const payload: userRegistrationPayload = {
         username: username.value,
@@ -21,11 +21,19 @@ export default () => {
       const res = await userRegistration(payload);
 
       if (res.success) {
-        $q.notify('succes');
+        $q.notify({
+          message: 'The data has been submitted successfully',
+          icon: 'check_circle',
+          color: 'positive',
+        });
       }
     } catch (error) {
       console.log('error', error);
-      $q.notify('errrr');
+      $q.notify({
+        message: 'Failed to submit data.',
+        icon: 'error',
+        color: 'negative',
+      });
     }
   };
 
