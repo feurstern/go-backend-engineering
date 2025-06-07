@@ -26,7 +26,6 @@ type TodoListPayload struct {
 }
 
 type TodoList struct {
-	gorm.Model
 	ID           int64          `gorm:"id"`
 	TodoParentId int64          `gorm:"foreignKey:TodoParent.id"`
 	List         string         `gorm:"not null;column:list"`

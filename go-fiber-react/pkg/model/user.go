@@ -18,6 +18,14 @@ type User struct {
 	DeletedAt gorm.DeletedAt `gorm:"index;column:deleted_at"`
 }
 
+type UserProfile struct {
+	ID          int64          `gorm:"primaryKey"`
+	User_Id     int64          `gorm:"foreignKey:User.id"`
+	Profile_Pic string         `gorm:"column:profile_pic"`
+	CreatedAt   time.Time      `gorm:"column:created_at"`
+	DeletedAt   gorm.DeletedAt `gorm:"index;column:deleted_at"`
+}
+
 type UserRoles struct {
 	ID        int            `gorm:"primaryKey"`
 	Name      string         `gorm:"not null; column:name"`
