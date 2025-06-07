@@ -49,3 +49,9 @@ export interface UserRegistrationRespsonse {
   message: string;
   data: Users;
 }
+
+export interface UserListRows {
+  no: number;
+  Username: string;
+  Email: string;
+}

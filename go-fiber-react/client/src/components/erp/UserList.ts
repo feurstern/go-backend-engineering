@@ -1,15 +1,19 @@
+import { getUserList } from 'src/service/user';
+import { UserListRows } from '../models';
+import { ref } from 'vue';
+
 export default () => {
   const columns = [
     {
       name: 'no',
       label: 'no',
-      //   align: 'left',
+      // align: 'left',
       field: 'no',
     },
     {
       name: 'username',
       label: 'username',
-      //   align: 'left',
+      // align: 'center',
       field: 'Username',
     },
     {
@@ -33,8 +37,29 @@ export default () => {
     },
   ];
 
+  const rows2 = ref<UserListRows[]>([]);
+
+  const fetchUserList = async () => {
+    try {
+      const res = await getUserList();
+      if (res.success) {
+        rows2.value = res.data.map((x, index) => ({
+          no: index + 1,
+          Username: x.Username,
+          Email: x.Email,
+        }));
+      }
+    } catch (error) {
+      alert('errori');
+    }
+  };
+
+  console.log('res', rows2.value.length);
+
   return {
     columns,
     rows,
+    rows2,
+    fetchUserList,
   };
 };
