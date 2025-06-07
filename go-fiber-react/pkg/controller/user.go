@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"go-fiber-react/pkg/database"
 	"go-fiber-react/pkg/model"
 	"strconv"
@@ -58,6 +59,7 @@ func DeleteUser(c *fiber.Ctx) error {
 			"msg":     "Invalid ID request",
 		})
 	}
+
 	db := database.DBConnection
 	var user *[]model.User
 
@@ -74,6 +76,66 @@ func DeleteUser(c *fiber.Ctx) error {
 	})
 
 	// if err:= db.where("id = %d")
+}
+
+func CreateUserProfile(c *fiber.Ctx) error {
+
+	db := database.DBConnection
+
+	userIdStr := c.FormValue("user_id")
+	userId, err := strconv.ParseInt(userIdStr, 10, 64)
+
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Invalid body request",
+		})
+	}
+
+	form, err := c.MultipartForm()
+
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"message": "Invalid body request",
+		})
+	}
+
+	file := form.File["images"]
+
+	var user model.User
+	if err := db.Model(&user).Where("id ?", userId).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"message": "Failed when inserting the profile data",
+		})
+	}
+
+	var userProfile []model.UserProfile
+
+	if len(file) > 0 {
+
+		for _, x := range file {
+			filename := fmt.Sprintf("/asset/images/%s", x.Filename)
+			userProfile = append(userProfile, model.UserProfile{
+				User_Id:     user.ID,
+				Profile_Pic: filename,
+			})
+
+			if err := db.Create(&userProfile).Error; err != nil {
+				return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+					"success": false,
+					"message": "Failed to insert the profile data",
+				})
+			}
+		}
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
+		"data":    userProfile,
+	})
+
 }
 
 // func GetAllTodoList(db *gorm.DB) ([]model.TodoList, error) {

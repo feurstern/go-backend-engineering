@@ -128,7 +128,6 @@ func Create(c *fiber.Ctx) error {
 			"message": "Inval.id body request",
 		})
 	}
-
 	files := form.File["images"]
 	var bookCover []model.BookCover
 
