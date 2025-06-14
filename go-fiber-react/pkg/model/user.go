@@ -32,3 +32,7 @@ type UserRoles struct {
 	CreatedAt time.Time      `gorm:"column:created_at"`
 	DeletedAt gorm.DeletedAt `gorm:"index;column:deleted_at"`
 }
+
+type UserRolePayload struct {
+	Name string `json:"name"`
+}
