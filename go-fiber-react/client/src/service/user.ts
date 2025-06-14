@@ -16,7 +16,6 @@ export const userRegistration = async (
   payload: userRegistrationPayload,
 ): Promise<UserRegistrationRespsonse> => {
   const res = await api.post('/registration', payload);
-
   return res.data;
 };
 

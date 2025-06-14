@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import useLoginComponent from './LoginComponent';
-
 const { email, password, onReset, handleLogin } = useLoginComponent();
 </script>
 
@@ -24,6 +23,7 @@ const { email, password, onReset, handleLogin } = useLoginComponent();
         hint="password"
         :rules="[(val) => (val && val.length > 3) || 'Please input the password correctly']"
       />
+
       <div>
         <q-btn label="Submit" type="submit" color="primary" />
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
