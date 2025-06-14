@@ -16,7 +16,14 @@ const { email, password, onReset, handleLogin } = useLoginComponent();
         :rules="[(val) => (val && val.length > 0) || 'Please input your email correctly!']"
       />
 
-      <q-input filled label="password" type="password" v-model="password" hint="password" />
+      <q-input
+        filled
+        label="password"
+        type="password"
+        v-model="password"
+        hint="password"
+        :rules="[(val) => (val && val.length > 3) || 'Please input the password correctly']"
+      />
       <div>
         <q-btn label="Submit" type="submit" color="primary" />
         <q-btn label="Reset" type="reset" color="primary" flat class="q-ml-sm" />
