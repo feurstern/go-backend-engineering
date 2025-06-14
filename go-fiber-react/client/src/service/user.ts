@@ -1,4 +1,6 @@
 import {
+  LoginPayload,
+  LoginResponse,
   userRegistrationPayload,
   UserRegistrationRespsonse,
   UserResponse,
@@ -14,6 +16,10 @@ export const userRegistration = async (
   payload: userRegistrationPayload,
 ): Promise<UserRegistrationRespsonse> => {
   const res = await api.post('/registration', payload);
+  return res.data;
+};
 
+export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
+  const res = await api.post('/login', payload, {});
   return res.data;
 };
