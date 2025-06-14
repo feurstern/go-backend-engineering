@@ -5,8 +5,7 @@ export default () => {
   const router = useRouter();
   const selectedLeftMenu: Ref<string> = ref('finance');
 
-  
-  const handleChange = (menu: string): void => {
+  const handleChange = async (menu: string) => {
     selectedLeftMenu.value = menu;
     router.push(`${menu.toLocaleLowerCase()}`);
   };
