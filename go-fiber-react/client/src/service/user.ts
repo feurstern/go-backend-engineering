@@ -21,6 +21,6 @@ export const userRegistration = async (
 };
 
 export const login = async (payload: LoginPayload): Promise<LoginResponse> => {
-  const res = await api.post('/login', payload, {});\
+  const res = await api.post('/login', payload, {});
   return res.data;
 };

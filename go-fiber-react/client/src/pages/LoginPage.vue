@@ -1,3 +1,11 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { Component, defineAsyncComponent } from 'vue';
 
-<template></template>
+const loginComponent: Component = defineAsyncComponent(
+  () => import('components/LoginComponent.vue'),
+);
+</script>
+
+<template>
+  <login-component />
+</template>
