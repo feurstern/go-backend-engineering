@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import {  onMounted } from 'vue';
+import { 
+   onMounted } from 'vue';
 import useUserList from './UserList';
 
 const { rows2, columns, fetchUserList } = useUserList();

@@ -48,3 +48,35 @@ func CreateUserRole(c *fiber.Ctx) error {
 		"data":    userRole,
 	})
 }
+
+func CreateUserRoles(c *fiber.Ctx) error {
+	db := database.DBConnection
+
+	payload := model.UserRolePayload{}
+
+	if err := c.BodyParser(&payload); err != nil {
+
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"success": false,
+			"Message": "Invalid request",
+		})
+	}
+
+	userRole := model.UserRoles{
+		Name: payload.Name,
+	}
+
+	if err := db.Create(&userRole).Error; err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"success": false,
+			"message": "Internal server error",
+		})
+
+	}
+
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"success": true,
+		"data":    userRole,
+	})
+
+}
